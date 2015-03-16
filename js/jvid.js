@@ -31,7 +31,7 @@
 
 		var thumbs = {
 			youtube: 'http://img.youtube.com/vi/ID/hqdefault.jpg',
-			vimeo: 'http://vimeo.com/ID/thumb'
+			vimeo: 'http://vimeo.com/api/v2/video/ID.json?callback=showThumb'
 		};
 
 		var iframes = {
@@ -50,24 +50,39 @@
 			src = iframe.getAttribute('src');
 			iframe.setAttribute('src', src+'&autoplay=1');
 			poster.className = 'poster hide';
-			window.setTimeout(showVideo, 1200, iframe, poster);
+			window.setTimeout(showVideo, 700, iframe, poster);
+		}
+
+		function initHTML(jvid, video){
+			jvid.innerHTML = jVid.replace('{{iframe}}', iframes[video.type].replace('ID', video.id))
+				.replace('{{thumb}}', (video.type === 'vimeo') ? video.thumb : thumbs[video.type].replace('ID', video.id))
+				.replace('{{titleclass}}', video.title ? ' title' : '')
+				.replace('{{title}}', video.title ? video.title : '');
+			jvid.getElementsByClassName('poster')[0].addEventListener('click', clickPlay);
 		}
 
 		base.init = function(){
 			if (base.$el.length) {
-				$.each(base.$el, function(){
+				$.each(base.$el, function() {
 					if (this.tagName !== 'DIV') return;
-					var video = {
-						id: this.getAttribute('data-video'),
-						title: this.getAttribute('data-title')
-					};
+					var jvid = this,
+						video = {
+							id: this.getAttribute('data-video'),
+							title: this.getAttribute('data-title')
+						};
 					video.type = isNaN(video.id) ? 'youtube' : 'vimeo';
-					video.html = jVid.replace('{{iframe}}', iframes[video.type].replace('ID',video.id))
-									 .replace('{{thumb}}', thumbs[video.type].replace('ID',video.id))
-									 .replace('{{titleclass}}', video.title ? ' title' : '')
-									 .replace('{{title}}', video.title ? video.title : '');
-					this.innerHTML = video.html;
-					this.getElementsByClassName('poster')[0].addEventListener('click', clickPlay);
+					if (video.type === 'vimeo') {
+						$.ajax({
+							dataType: 'jsonp',
+							success: function(data) {
+								video.thumb = data[0].thumbnail_large;
+								initHTML(jvid, video);
+							},
+							url: thumbs.vimeo.replace('ID', video.id)
+						});
+					} else {
+						initHTML(jvid, video);
+					}
 				});
 			}
 		};

@@ -23,44 +23,44 @@
 .jVid .poster {
 	cursor: pointer;
 	z-index: 10;
-	transition: .8s ease;
-	-webkit-transition: .8s ease;
-	-moz-transition: .8s ease;
-	-o-transition: .8s ease;
+	-webkit-transition: all .8s ease;
+	-moz-transition: all .8s ease;
+	-o-transition: all .8s ease;
+	transition: all .8s ease;
 }
 
 .jVid .poster .bg {
 	background-size: cover;
 	background-position: center center;
-	transition: .3s ease;
-	-webkit-transition: .3s ease;
-	-moz-transition: .3s ease;
-	-o-transition: .3s ease;
+	-webkit-transition: transform .3s ease;
+	-moz-transition: transform .3s ease;
+	-o-transition: transform .3s ease;
+	transition: transform .3s ease;
 }
 
 .jVid .poster .fade {
 	background: black;
 	opacity: 0;
-	transition: .3s ease;
-	-webkit-transition: .3s ease;
-	-moz-transition: .3s ease;
-	-o-transition: .3s ease;
+	-webkit-transition: opacity .3s ease;
+	-moz-transition: opacity .3s ease;
+	-o-transition: opacity .3s ease;
+	transition: opacity .3s ease;
 }
 
 .jVid .play {
- 	background: black;
- 	border: 2px solid white;
- 	height: 64px;
- 	left: 50%;
- 	margin: -33px 0 0 -33px;
- 	position: absolute;
- 	top: 50%;
- 	width: 64px;
- 	z-index: 15;
- 	transition: .3s ease;
- 	-webkit-transition: .3s ease;
- 	-moz-transition: .3s ease;
- 	-o-transition: .3s ease;
+	background: black;
+	border: 2px solid white;
+	height: 64px;
+	left: 50%;
+	margin: -33px 0 0 -33px;
+	position: absolute;
+	top: 50%;
+	width: 64px;
+	z-index: 15;
+	-webkit-transition: transform .3s ease;
+	-moz-transition: transform .3s ease;
+	-o-transition: transform .3s ease;
+	transition: transform .3s ease;
 }
 
 .jVid .play:after {
@@ -73,10 +73,10 @@
 	border-style: solid;
 	border-width: 12px 0 12px 19px;
 	border-color: transparent transparent transparent rgba(255, 255, 255, 1);
-	transition: .3s ease;
-	-webkit-transition: .3s ease;
-	-moz-transition: .3s ease;
-	-o-transition: .3s ease;
+	-webkit-transition: transform .3s ease;
+	-moz-transition: transform .3s ease;
+	-o-transition: transform .3s ease;
+	transition: transform .3s ease;
 }
 
 .jVid .play.dark:after {
@@ -105,10 +105,10 @@
 }
 
 .jVid.arrowScale .play:hover {
-	transform: scale(1.1);
 	-webkit-transform: scale(1.1);
 	-moz-transform: scale(1.1);
 	-o-transform: scale(1.1);
+	transform: scale(1.1);
 }
 
 .jVid .title {
